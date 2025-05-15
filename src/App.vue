@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="top">
-            <span class="title">基于Gojs的拖拽思维导图设计器</span>
+            <span class="title">基于Gojs的拖拽思维导图编辑器</span>
         </div>
         <div class="main">
             <imageNode></imageNode>
@@ -21,9 +21,6 @@ import imageNode from './stageAchievements/imageNode.vue';
     width: 100vw;
     height: 100vh;
     background-color: #f1f3f5;
-    overflow: hidden; /* 隐藏容器滚动条 */
-    display: flex;
-    flex-direction: column;
 }
 
 .top {

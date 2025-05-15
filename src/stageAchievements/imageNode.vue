@@ -1,63 +1,98 @@
 <template>
     <div class="common-layout">
         <div class="layout-container">
+            <!--左侧元素区域-->
             <div id="PaletteDiv" class="layout-aside">
-                <div id="svg_zhaChi" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <img id="svg_zhaChi" src="./pid_node/渣池.svg">
+                <span>基本几何图形</span>
+                <div class="baseBlockClass">
+                    <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
+                            <img src="/src/assets/base/rectangle.svg" style="width: 75px; height: 75px;" id="rectangle" />
+                        </el-tooltip>
+                    </div>
+                    <div id="RoundedRectangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="圆角矩形" placement="top-start">
+                            <img src="/src/assets/base/RoundedRectangle.svg" style="width: 75px; height: 75px;" id="RoundedRectangle" />
+                        </el-tooltip>
+                    </div>
+                    <div id="Square" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="正方形" placement="top-start">
+                            <img src="/src/assets/base/Square.svg" style="width: 75px; height: 75px;" id="Square" />
+                        </el-tooltip>
+                    </div>
+                    <div id="rotundity" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="圆形" placement="top-start">
+                            <img src="/src/assets/base/rotundity.svg" style="width: 75px; height: 75px;" id="rotundity" />
+                        </el-tooltip> 
+                    </div>
+                    <div id="triangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="三角形" placement="top-start">
+                            <img src="/src/assets/base/triangle.svg" style="width: 75px; height: 75px;" id="triangle" />
+                        </el-tooltip>             
+                    </div>
+                    <div id="rhombus" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
+                            <img src="/src/assets/base/rhombus.svg" style="width: 75px; height: 75px;" id="rhombus" />
+                        </el-tooltip>  
+                    </div>
                 </div>
-                <div id="html"
-                    style="background-color: aqua; width: 100px; height: 100px; margin-left: auto; margin-right: auto;"
-                    draggable="true" @dragstart="dragstart">html元素</div>
-                <div class="pipeClass">
-                    <span style="margin: 5px;">管道</span>
-                    <div id="pipe" style="background-color: gray; width: 30px; height: 30px; margin: 5px;"
-                        draggable="true" @dragstart="dragstart"></div>
+                <span>SVG几何图形</span>
+                <div class="svgBlockClass">
+                    <div id="svg_zhaChi" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <img id="svg_zhaChi" src="./pid_node/渣池.svg">
+                    </div>
                 </div>
             </div>
+            <!--画布区域-->
             <div id="diagramDiv" class="layout-main" @dragover="event => event.preventDefault()"
-                @dragenter="event => event.preventDefault()" @drop="drop"></div>
+                @dragenter="event => event.preventDefault()" @drop="drop">
+            </div>
+            <!--右侧功能按钮区域-->
             <div id="operationDiv" class="layout-right">
-                <div>
-                    <el-button @click="exportData" style="margin: 8px;">导出数据</el-button>
+                <div style="background-color: bisque;">
+                    <span>元素操作按钮</span>
+                    <!-- <el-button @click="exportData" style="margin: 8px;">导出数据</el-button> -->
                     <el-button @click="toggleEditMode" style="margin: 8px;">切换编辑/预览模式</el-button>
                     <el-button @click="horizontalFlip" style="margin: 8px;">水平翻转选中节点</el-button>
                     <el-button @click="verticalFlip" style="margin: 8px;">垂直翻转选中节点</el-button>
                 </div>
-                <el-button class="btnClass" @click="dcsDataShow">DCS数据</el-button>
-                <el-button class="btnClass" @click="alarmDataShow">设备告警</el-button>
-                <el-button class="btnClass" @click="riskDataShow">风险预警</el-button>
-                <el-button class="btnClass" @click="damageDataShow">损伤分布</el-button>
+                <div style="margin-top: 10px; background-color: bisque;">
+                    <span>面板操作按</span>
+                    <el-button class="btnClass" @click="dcsDataShow">DCS数据</el-button>
+                    <el-button class="btnClass" @click="alarmDataShow">设备告警</el-button>
+                    <el-button class="btnClass" @click="riskDataShow">风险预警</el-button>
+                    <el-button class="btnClass" @click="damageDataShow">损伤分布</el-button>
+                </div>
             </div>
         </div>
     </div>
 
-
-    <el-dialog v-model="dialogVisible" title="给当前节点添加端口/标定点">
+    <el-dialog v-model="dialogVisible" title="给当前节点添加连线端口" style="width: 675px; height: 200px; position: relative;">
         <div>
-            <el-switch v-model="changeModel" @change="toggleDivs">
-            </el-switch>
-            <br>
-            <div v-if="changeModel">
-                <el-button @click="addPort('top')" style="margin-right: 8px;">添加上端口</el-button>
-                <el-button @click="addPort('bottom')" style="margin-right: 8px;">添加下端口</el-button>
-                <el-button @click="addPort('left')" style="margin-right: 8px;">添加左端口</el-button>
-                <el-button @click="addPort('right')" style="margin-right: 8px;">添加右端口</el-button>
-                <el-button style="margin-left: 280px" @click="addDataPanel">创建数据面板</el-button>
+            <div v-if="changeModel"
+                style="display: flex; justify-items: center; align-items: center; margin-top: 5px; margin-bottom: 2px;">
+                <span>节点连接线端口的添加：</span>
+                <div style="margin-left: 10px;">
+                    <el-button @click="addPort('top')" style="margin-right: 8px;">添加上端口</el-button>
+                    <el-button @click="addPort('bottom')" style="margin-right: 8px;">添加下端口</el-button>
+                    <el-button @click="addPort('left')" style="margin-right: 8px;">添加左端口</el-button>
+                    <el-button @click="addPort('right')" style="margin-right: 8px;">添加右端口</el-button>
+                </div>
             </div>
-            <div v-else>
-                <button @click="addMark()">添加标定点</button>
+            <span style="font-size: smaller; color: gray;">Tips：创建完端口后，可以通过Shift+鼠标左键，来移动端口的位置</span>
+            <div style="margin-top: 30px; display: flex; justify-items: center; align-items: center;">
+                <span>节点数据面板的创建：</span>
+                <el-button style="margin-left: 24px" @click="addDataPanel">创建数据面板</el-button>
             </div>
+            <el-button style="right: 10px; position: absolute; right: 30px;"
+                @click="dialogVisible = false">关闭</el-button>
         </div>
-    </el-dialog>
-
-    <el-dialog v-model="pipeDialogVisible" title="添加管道">
-        <button @click="addPipe">添加管道</button>
     </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import go, { Geometry } from 'gojs';
+import go from 'gojs';
 import { PortShiftingTool } from './extensions/PortShiftingTool';
 import { ResizeMultipleTool } from './extensions/ResizeMultipleTool';
 // import { LinkLabelDraggingTool } from './extensions/LinkLabelDraggingTools';
@@ -143,34 +178,6 @@ const portPanel = $(go.Panel,
     )
 )
 
-// 标定点模板
-const markPanel = $(go.Panel,
-    {
-        portId: "mark",
-        cursor: 'pointer',
-        alignment: new go.Spot(0.5, 0.3),
-        contextMenu:
-            $("ContextMenu",
-                $("ContextMenuButton",
-                    $(go.TextBlock, "Remove Mark", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
-                    {
-                        click: (e: any, obj: any) => removeMark(obj.part.adornedObject),
-                        "ButtonBorder.fill": "white",
-                        "_buttonFillOver": "skyblue"
-                    }
-                )
-            ),
-    },
-    new go.Binding('portId', 'markId'),
-    $(go.Shape, 'Rectangle',
-        {
-            strokeWidth: 1,
-            desiredSize: new go.Size(6, 6),
-            fill: "red"
-        },
-    )
-)
-
 var zhaChiGeometry = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
 
 // 切换添加端口/标定点的形式
@@ -207,24 +214,22 @@ function initDiagram() {
                 resizable: true,
                 rotatable: true
             },
-            new go.Binding("location", "loc"),
-            new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),  // 进行元素位置信息的绑定
+            new go.Binding("location", "loc"),  // 进行元素位置信息的绑定
+            new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
             // 端口模板
             new go.Binding('itemArray', 'portArray'), {
             itemTemplate: portPanel,
         },
             $(go.Panel, 'Spot',
-                // 标定点模板
-                new go.Binding('itemArray', 'markArray'), {
-                itemTemplate: markPanel
-            },
                 $(go.Panel, 'Spot',
                     $(go.Shape, "RoundedRectangle",
                         {
                             fill: "white",
-                            strokeWidth: 0
+                            stroke: "black",
+                            strokeWidth: 2.0
                         },
                         new go.Binding("fill", "color"),
+                        new go.Binding("figure", "figure"),
                     ),
                     $(go.TextBlock,
                         {
@@ -288,10 +293,6 @@ function initDiagram() {
                 itemTemplate: portPanel,
             },
                 $(go.Panel, 'Spot',
-                    // 标定点模板
-                    new go.Binding('itemArray', 'markArray'), {
-                    itemTemplate: markPanel
-                },
                     $(go.Panel, 'Spot',
                         $(go.Shape, "RoundedRectangle",
                             {
@@ -356,70 +357,6 @@ function initDiagram() {
             )
         );
 
-    // 管道模板
-    myDiagram.nodeTemplateMap.add('pipe',
-        $(go.Node, 'Spot',
-            {
-                resizable: true,
-                rotatable: true,
-                cursor: 'move',
-                segmentIndex: NaN,
-                segmentFraction: 0.5,
-                visible: true,
-                _isLinkLabel: true,
-                layerName: 'Foreground'
-            },
-            new go.Binding("location", "loc"),
-            new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
-            new go.Binding('itemArray', 'portArray'), {
-            itemTemplate: portPanel,
-        },
-            $(go.Panel, 'Spot',
-                // 标定点模板
-                new go.Binding('itemArray', 'markArray'), {
-                itemTemplate: markPanel
-            },
-                $(go.Panel, 'Spot',
-                    $(go.Shape, "RoundedRectangle",
-                        {
-                            geometry: go.Geometry.parse("XF M 0 0 L 30 0 L 30 30 L 0 30 Z"),
-                            stroke: "black",
-                            fill: "gray",
-                            strokeWidth: 1.5,
-                            width: 30,
-                            height: 30
-                        },
-                        new go.Binding('fill', 'color'),
-                    ),
-                    $(go.TextBlock,
-                        {
-                            margin: 10,
-                            textAlign: 'center',
-                            font: 'bold 14px Segoe UI,sans-serif',
-                            stroke: '#484848',
-                            editable: true,
-                            _isNodeLabel: true,
-                            cursor: "move"
-                        },
-                        // new go.Binding('text', 'key').makeTwoWay(),
-                    ),
-                    {
-                        toolTip:  // 定义节点工具提示
-                            $("ToolTip",
-                                $(go.TextBlock, { margin: 4 },
-                                    new go.Binding("text", "key"))  // 绑定节点的颜色信息
-                            )
-                    },
-                    {
-                        doubleClick: function () {   // 在节点中鼠标左键双击打开添加节点端口弹出框
-                            dialogVisible.value = true;
-                        }
-                    }
-                )
-            )
-        )
-    );
-
     // 数据展示面板模板
     myDiagram.nodeTemplateMap.add('infoPanel',
         $(go.Node, "Spot",
@@ -470,7 +407,7 @@ function initDiagram() {
                                         )
                                 },
                                 new go.Binding('fill', 'color'),
-                                new go.Binding('visible', '', (data: any, obj: any) => {
+                                new go.Binding('visible', '', (obj: any) => {
                                     const nodeData = obj.part.data;
                                     return nodeData.riskVisible !== false;
                                 })
@@ -517,7 +454,7 @@ function initDiagram() {
                                         },
                                         new go.Binding('text', 'unit')
                                     ),
-                                    new go.Binding('visible', '', (data: any, obj: any) => {
+                                    new go.Binding('visible', '', (obj: any) => {
                                         const nodeData = obj.part.data;
                                         return nodeData.dcsVisible !== false;
                                     })
@@ -573,7 +510,7 @@ function initDiagram() {
                                         },
                                         new go.Binding('text', 'damageValue')
                                     ),
-                                    new go.Binding('visible', '', (data: any, obj: any) => {
+                                    new go.Binding('visible', '', (obj: any) => {
                                         const nodeData = obj.part.data;
                                         return nodeData.damageVisible !== false;
                                     })
@@ -723,19 +660,10 @@ function initDiagram() {
             myDiagram.model.set(link.data, "LinkCategory", "infoPanelLink");
         }
     });
-
-    const nodeDataArray = [
-        { key: "add1", color: "lightyellow", loc: new go.Point(-150, 200), portArray: [{ portId: "top0", portKey: "top" }, { portId: "left0", portKey: "left" }, { portId: "right0", portKey: "right" }, { portId: "bottom0", portKey: "bottom" }], markArray: [] },
-        { key: "add2", color: "lightblue", loc: new go.Point(100, 50), category: "zhaChi", portArray: [{ portId: "bottom0", portKey: "bottom" }], markArray: [] },
-        { key: "add3", color: "lightblue", loc: new go.Point(300, 150), category: "zhaChi", portArray: [{ portId: "bottom0", portKey: "bottom" }], markArray: [] },
-        { key: "pipe1", color: "gray", loc: new go.Point(0, 100), category: "pipe", portArray: [{ portId: "top0", portKey: "top" }], markArray: [{ portId: "mark0" }] },
-        { key: "pipe1信息面板", color: "red", loc: new go.Point(-80, -120), portArray: [{ portId: "top0", portKey: "top" }, { portId: "left0", portKey: "left" }, { portId: "right0", portKey: "right" }, { portId: "bottom0", portKey: "bottom" }], DCSArray: [{ name: "流速", value: "20", unit: "m/s" }, { name: "温度", value: "30", unit: "℃" }], damageArray: [{ damageName: "盐酸腐蚀", damageValue: "100%" }], alarmArray: [{ alarmName: "警报" }], riskData: "高风险", category: "infoPanel" }
-    ];
-    const linkDataArray = [
-        { from: "add1", fromPort: "top0", to: "add2", toPort: "bottom0", labelKeys: ["pipe1"] },
-        { from: "add1", fromPort: "bottom0", to: "add3", toPort: "bottom0" },
-        { from: "pipe1信息面板", fromPort: "bottom0", to: "pipe1", toPort: "top0", LinkCategory: "infoPanelLink" }
-    ];
+    // 节点数组
+    const nodeDataArray = <any>[];
+    // 连线数组
+    const linkDataArray = <any>[];
 
     myDiagram.model =
         $(go.GraphLinksModel,
@@ -767,10 +695,18 @@ function dragstart(event: any) {
     // 设置拖动数据
     if (target.id === "svg_zhaChi") {
         event.dataTransfer.setData("node-type", "zhaChi");
-    } else if (target.id === "html") {
-        event.dataTransfer.setData("node-type", "html");
-    } else if (target.id === "pipe") {
-        event.dataTransfer.setData("node-type", "pipe");
+    } else if (target.id === "rectangle") {   // 矩形
+        event.dataTransfer.setData("node-type", "rectangle");
+    } else if (target.id === "RoundedRectangle") {   // 圆角矩形
+        event.dataTransfer.setData("node-type", "RoundedRectangle");
+    } else if (target.id === "Square") {   // 正方形形
+        event.dataTransfer.setData("node-type", "Square");
+    } else if (target.id === "rotundity") {   // 圆形
+        event.dataTransfer.setData("node-type", "rotundity");
+    } else if (target.id === "triangle") {    // 三角形
+        event.dataTransfer.setData("node-type", "triangle");
+    } else if (target.id === "rhombus") {    // 菱形
+        event.dataTransfer.setData("node-type", "rhombus");
     }
 }
 
@@ -796,20 +732,55 @@ function drop(event: any) {
     // 获取拖动数据
     let nodeType = event.dataTransfer.getData("node-type");
     let category = "";
-    let color = 'aqua';
-    let key = "html元素";
+    let color = '';
+    let key = "";
+    let size = '';
+    let figure = '';
+    if (nodeType === "rectangle") {  // 矩形
+        key = '请输入内容';
+        size = '150 75';
+        category = "请输入内容";
+        figure = 'Rectangle';
+    }
+    if (nodeType === "RoundedRectangle") {  // 圆角矩形
+        key = '请输入内容';
+        size = '150 75';
+        category = "请输入内容";
+        figure = 'RoundedRectangle';
+    }
+    if (nodeType === "Square") {  // 正方形
+        key = '请输入内容';
+        size = '75 75';
+        category = "请输入内容";
+        figure = 'Square';
+    }
+    if (nodeType === "rotundity") {  // 圆形
+        key = '请输入内容';
+        size = '75 75';
+        category = "请输入内容";
+        figure = 'Ellipse';
+    }
+    if (nodeType === "triangle") {  // 三角形
+        key = '请输入内容';
+        size = '100 100';
+        category = "请输入内容";
+        figure = 'Triangle';
+    }
+    if (nodeType === "rhombus") {  // 菱形
+        key = '请输入内容';
+        size = '150 75';
+        category = "请输入内容";
+        figure = 'Diamond';
+    }
     if (nodeType === "zhaChi") {
         category = "zhaChi";
         key = "渣池";
     }
-    if (nodeType === "pipe") {
-        category = "pipe";
-        color = 'gray';
-        key = "30x30 管道"
-    }
     const newData = {
         key: key,
         color: color,
+        size: size,
+        figure: figure,
         loc: new go.Point(point.x, point.y),
         portArray: [],
         markArray: [],
@@ -859,39 +830,6 @@ function removePort(port: any) {
         }
     }
     myDiagram.commitTransaction('removePort');
-}
-
-// 添加标定点
-function addMark() {
-    myDiagram.startTransaction('addMark');
-    myDiagram.selection.each((node: any) => {
-        if (!(node instanceof go.Node)) return;
-        let i = 0;
-        while (node.findPort("mark" + i.toString()) !== node) i++;
-        const name = "mark" + i.toString();
-        const newMarkData = {
-            markId: name
-        };
-        const arr = node.data.markArray;
-        if (arr) {
-            myDiagram.model.insertArrayItem(arr, -1, newMarkData);
-        }
-    });
-    myDiagram.commitTransaction('addMark');
-}
-
-// 删除标定点
-function removeMark(mark: any) {
-    myDiagram.startTransaction('removeMark');
-    const markId = mark.portId;
-    const arr = mark.panel.itemArray;
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].markId === markId) {
-            myDiagram.model.removeArrayItem(arr, i);
-            break;
-        }
-    }
-    myDiagram.commitTransaction('removeMark');
 }
 
 // 设置一开始画布为编辑模式
@@ -969,33 +907,6 @@ function damageDataShow() {
         })
     }
     myDiagram.commitTransaction("changeDamageShowModel");
-}
-
-// 在连接线上添加管道
-function addPipe() {
-    myDiagram.startTransaction("addPipeToLinks");
-    myDiagram.selection.each(function (link: any) {
-        if (link instanceof go.Link) {
-            var newPipeNode =
-            {
-                key: "newPipe",
-                color: 'gray',
-                category: "pipe",
-                portArray: [],
-                markArray: []
-            };
-            // 添加节点到节点数据模型中
-            myDiagram.model.addNodeData(newPipeNode);
-
-            // 确保link.data有linkLabels属性
-            if (!link.data.linkLabels) {
-                link.data.linkLabels = [];
-            }
-            // 向连接中添加标签键，将新节点的唯一标识符（key数据）添加到连接线的labelKeys属性中，使节点显示在连接线上
-            myDiagram.model.addLabelKeyForLinkData(link.data, newPipeNode.key)
-        }
-    });
-    myDiagram.commitTransaction("addPipeToLinks");
 }
 
 // 创建设备的数据面板
@@ -1085,6 +996,7 @@ onMounted(() => {
     height: 100%;
     display: flex;
     justify-content: space-between;
+    background-color: white;
 }
 
 .layout-container {
@@ -1095,13 +1007,15 @@ onMounted(() => {
 .layout-aside {
     width: 10%;
     height: 100%;
-    background-color: rgb(216, 212, 212);
+    border: 1px solid #645d5d;
+    /* 设置1像素宽的灰色实线边框 */
+    border-radius: 8px;
+    /* 设置8像素的圆角 */
 }
 
 .layout-main {
     width: 85%;
     height: 100%;
-    background-color: #DAE4E4;
 }
 
 .layout-right {
@@ -1109,16 +1023,44 @@ onMounted(() => {
     height: 100%;
 }
 
+.baseBlockClass {
+    width: 100%;
+    height: 30%;
+    display: grid;
+    /* 启用 Grid 布局 */
+    grid-template-columns: repeat(2, 1fr);
+    /* 创建 3 列，每列宽度相等 */
+    gap: 10px;
+    /* 可选：设置子元素之间的间距 */
+}
+
+.svgBlockClass {
+    width: 100%;
+    height: 70%;
+    display: grid;
+    /* 启用 Grid 布局 */
+    grid-template-columns: repeat(2, 1fr);
+    /* 创建 3 列，每列宽度相等 */
+    gap: 10px;
+    /* 可选：设置子元素之间的间距 */
+}
+
+.elementClass {
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    text-align: center;
+    background-color: #f7f4f4;
+}
+
 .btnClass {
-    width: 80px;
-    height: 80px;
+    width: 60%;
     margin: 10px;
 }
 
 .svg_class {
     width: 100px;
     height: 100px;
-    background-color: white;
     /* border: 1px solid black; */
     display: flex;
     justify-content: center;
@@ -1127,12 +1069,5 @@ onMounted(() => {
     margin-right: auto;
     margin-bottom: 10px;
     margin-top: 10px;
-}
-
-.pipeClass {
-    margin-left: 5px;
-    margin-top: 15px;
-    margin-right: 5px;
-    border: 1px solid #000;
 }
 </style>
