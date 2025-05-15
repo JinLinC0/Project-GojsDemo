@@ -3,8 +3,8 @@
         <div class="layout-container">
             <!--左侧元素区域-->
             <div id="PaletteDiv" class="layout-aside">
-                <span>基本几何图形</span>
-                <div class="baseBlockClass">
+                <span style="display: block; text-align: center; font-weight: bold;">基本几何图形</span>
+                <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
                     <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
                             <img src="/src/assets/base/rectangle.svg" style="width: 75px; height: 75px;" id="rectangle" />
@@ -36,10 +36,37 @@
                         </el-tooltip>  
                     </div>
                 </div>
-                <span>SVG几何图形</span>
+                <span style="display: block; text-align: center; font-weight: bold;">SVG几何图形</span>
                 <div class="svgBlockClass">
                     <div id="svg_zhaChi" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <img id="svg_zhaChi" src="./pid_node/渣池.svg">
+                        <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
+                            <img id="svg_zhaChi" src="./pid_node/渣池.svg">
+                        </el-tooltip>  
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        </el-tooltip>  
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        </el-tooltip>  
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        </el-tooltip>  
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        </el-tooltip>  
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        </el-tooltip>  
                     </div>
                 </div>
             </div>
@@ -179,6 +206,7 @@ const portPanel = $(go.Panel,
 )
 
 var zhaChiGeometry = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
+var pentagon = go.Geometry.parse("100,20 170,70 150,150 50,150 30,70");
 
 // 切换添加端口/标定点的形式
 function toggleDivs(value: boolean) {
@@ -268,7 +296,7 @@ function initDiagram() {
                                         "ButtonBorder.fill": "white",
                                         "_buttonFillOver": "skyblue",
                                     }
-                                )
+                                ),
                             )
                     },
                     {
@@ -296,11 +324,11 @@ function initDiagram() {
                     $(go.Panel, 'Spot',
                         $(go.Shape, "RoundedRectangle",
                             {
-                                geometry: zhaChiGeometry,
                                 stroke: "black",
                                 fill: "white",
-                                strokeWidth: 1.5
+                                strokeWidth: 2.0
                             },
+                            new go.Binding('geometry', 'geometry').makeTwoWay(),
                             new go.Binding('geometry', 'geometry').makeTwoWay(),
                             // new go.Binding('geometry', '', (data)=>{
                             //     let geometry = new go.Geometry.parse()
@@ -345,7 +373,15 @@ function initDiagram() {
                                             "ButtonBorder.fill": "white",
                                             "_buttonFillOver": "skyblue",
                                         }
-                                    )
+                                    ),
+                                    $("ContextMenuButton",
+                                        $(go.TextBlock, "Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        {
+                                            click: (e: any) => e.diagram.commandHandler.copySelection(),
+                                            "ButtonBorder.fill": "white",
+                                            "_buttonFillOver": "skyblue",
+                                        }
+                                    ),
                                 )
                         },
                         {
@@ -646,7 +682,7 @@ function initDiagram() {
                         return o.diagram.commandHandler.canRedo();  // 可以重做返回true，否则返回false
                     }
                     return false;
-                }).ofObject())
+                }).ofObject()),
         );
 
     // 如果以信息面板端口为终点/起点的连接线，使用infoPanelLink类型的连接线
@@ -692,10 +728,8 @@ function dragstart(event: any) {
     dragStartOffsetX.value = event.offsetX - target.clientWidth / 2;
     dragStartOffsetY.value = event.offsetY - target.clientHeight / 2;
 
-    // 设置拖动数据
-    if (target.id === "svg_zhaChi") {
-        event.dataTransfer.setData("node-type", "zhaChi");
-    } else if (target.id === "rectangle") {   // 矩形
+    // 设置拖动数据  基本图形
+    if (target.id === "rectangle") {   // 矩形
         event.dataTransfer.setData("node-type", "rectangle");
     } else if (target.id === "RoundedRectangle") {   // 圆角矩形
         event.dataTransfer.setData("node-type", "RoundedRectangle");
@@ -707,6 +741,13 @@ function dragstart(event: any) {
         event.dataTransfer.setData("node-type", "triangle");
     } else if (target.id === "rhombus") {    // 菱形
         event.dataTransfer.setData("node-type", "rhombus");
+    }
+
+    // 设置拖动数据  SVG图形
+    if (target.id === "svg_zhaChi") {
+        event.dataTransfer.setData("node-type", "zhaChi");
+    } else if (target.id === "pentagon") {
+        event.dataTransfer.setData("node-type", "pentagon");
     }
 }
 
@@ -775,6 +816,10 @@ function drop(event: any) {
     if (nodeType === "zhaChi") {
         category = "zhaChi";
         key = "渣池";
+    }
+    if (nodeType === "pentagon") {
+        category = "pentagon";
+        key = "请输入内容";
     }
     const newData = {
         key: key,
@@ -1036,7 +1081,7 @@ onMounted(() => {
 
 .svgBlockClass {
     width: 100%;
-    height: 70%;
+    height: 30%;
     display: grid;
     /* 启用 Grid 布局 */
     grid-template-columns: repeat(2, 1fr);
@@ -1059,15 +1104,10 @@ onMounted(() => {
 }
 
 .svg_class {
-    width: 100px;
-    height: 100px;
-    /* border: 1px solid black; */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    text-align: center;
+    background-color: #f7f4f4;
 }
 </style>
