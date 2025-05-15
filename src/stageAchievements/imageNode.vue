@@ -1,95 +1,94 @@
 <template>
     <div class="common-layout">
-        <div class="layout-container">
-            <!--左侧元素区域-->
-            <div id="PaletteDiv" class="layout-aside">
-                <span style="display: block; text-align: center; font-weight: bold;">基本几何图形</span>
-                <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
-                    <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
-                            <img src="/src/assets/base/rectangle.svg" style="width: 75px; height: 75px;" id="rectangle" />
-                        </el-tooltip>
-                    </div>
-                    <div id="RoundedRectangle" class="elementClass" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="圆角矩形" placement="top-start">
-                            <img src="/src/assets/base/RoundedRectangle.svg" style="width: 75px; height: 75px;" id="RoundedRectangle" />
-                        </el-tooltip>
-                    </div>
-                    <div id="Square" class="elementClass" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="正方形" placement="top-start">
-                            <img src="/src/assets/base/Square.svg" style="width: 75px; height: 75px;" id="Square" />
-                        </el-tooltip>
-                    </div>
-                    <div id="rotundity" class="elementClass" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="圆形" placement="top-start">
-                            <img src="/src/assets/base/rotundity.svg" style="width: 75px; height: 75px;" id="rotundity" />
-                        </el-tooltip> 
-                    </div>
-                    <div id="triangle" class="elementClass" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="三角形" placement="top-start">
-                            <img src="/src/assets/base/triangle.svg" style="width: 75px; height: 75px;" id="triangle" />
-                        </el-tooltip>             
-                    </div>
-                    <div id="rhombus" class="elementClass" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
-                            <img src="/src/assets/base/rhombus.svg" style="width: 75px; height: 75px;" id="rhombus" />
-                        </el-tooltip>  
-                    </div>
+        <!--左侧元素区域-->
+        <div id="PaletteDiv" class="layout-aside">
+            <span style="display: block; text-align: center; font-weight: bold;">基本几何图形</span>
+            <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
+                <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
+                        <img src="/src/assets/base/rectangle.svg" style="width: 75px; height: 75px;" id="rectangle" />
+                    </el-tooltip>
                 </div>
-                <span style="display: block; text-align: center; font-weight: bold;">SVG几何图形</span>
-                <div class="svgBlockClass">
-                    <div id="svg_zhaChi" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
-                            <img id="svg_zhaChi" src="./pid_node/渣池.svg">
-                        </el-tooltip>  
-                    </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
-                        </el-tooltip>  
-                    </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
-                        </el-tooltip>  
-                    </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
-                        </el-tooltip>  
-                    </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
-                        </el-tooltip>  
-                    </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
-                        </el-tooltip>  
-                    </div>
+                <div id="RoundedRectangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="圆角矩形" placement="top-start">
+                        <img src="/src/assets/base/RoundedRectangle.svg" style="width: 75px; height: 75px;"
+                            id="RoundedRectangle" />
+                    </el-tooltip>
+                </div>
+                <div id="Square" class="elementClass" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="正方形" placement="top-start">
+                        <img src="/src/assets/base/Square.svg" style="width: 75px; height: 75px;" id="Square" />
+                    </el-tooltip>
+                </div>
+                <div id="rotundity" class="elementClass" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="圆形" placement="top-start">
+                        <img src="/src/assets/base/rotundity.svg" style="width: 75px; height: 75px;" id="rotundity" />
+                    </el-tooltip>
+                </div>
+                <div id="triangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="三角形" placement="top-start">
+                        <img src="/src/assets/base/triangle.svg" style="width: 75px; height: 75px;" id="triangle" />
+                    </el-tooltip>
+                </div>
+                <div id="rhombus" class="elementClass" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
+                        <img src="/src/assets/base/rhombus.svg" style="width: 75px; height: 75px;" id="rhombus" />
+                    </el-tooltip>
                 </div>
             </div>
-            <!--画布区域-->
-            <div id="diagramDiv" class="layout-main" @dragover="event => event.preventDefault()"
-                @dragenter="event => event.preventDefault()" @drop="drop">
+            <span style="display: block; text-align: center; font-weight: bold;">SVG几何图形</span>
+            <div class="svgBlockClass">
+                <div id="svg_zhaChi" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
+                        <img id="svg_zhaChi" src="./pid_node/渣池.svg">
+                    </el-tooltip>
+                </div>
+                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                    </el-tooltip>
+                </div>
+                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                    </el-tooltip>
+                </div>
+                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                    </el-tooltip>
+                </div>
+                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                    </el-tooltip>
+                </div>
+                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                    </el-tooltip>
+                </div>
             </div>
-            <!--右侧功能按钮区域-->
-            <div id="operationDiv" class="layout-right">
-                <div style="background-color: bisque;">
-                    <span>元素操作按钮</span>
-                    <!-- <el-button @click="exportData" style="margin: 8px;">导出数据</el-button> -->
-                    <el-button @click="toggleEditMode" style="margin: 8px;">切换编辑/预览模式</el-button>
-                    <el-button @click="horizontalFlip" style="margin: 8px;">水平翻转选中节点</el-button>
-                    <el-button @click="verticalFlip" style="margin: 8px;">垂直翻转选中节点</el-button>
-                </div>
-                <div style="margin-top: 10px; background-color: bisque;">
-                    <span>面板操作按</span>
-                    <el-button class="btnClass" @click="dcsDataShow">DCS数据</el-button>
-                    <el-button class="btnClass" @click="alarmDataShow">设备告警</el-button>
-                    <el-button class="btnClass" @click="riskDataShow">风险预警</el-button>
-                    <el-button class="btnClass" @click="damageDataShow">损伤分布</el-button>
-                </div>
+        </div>
+        <!--画布区域-->
+        <div id="diagramDiv" class="layout-main" @dragover="event => event.preventDefault()"
+            @dragenter="event => event.preventDefault()" @drop="drop">
+        </div>
+        <!--右侧功能按钮区域-->
+        <div id="operationDiv" class="layout-right">
+            <div>
+                <span style="display: block; text-align: center; font-weight: bold;">元素操作按钮</span>
+                <!-- <el-button @click="exportData" style="margin: 8px;">导出数据</el-button> -->
+                <el-button @click="toggleEditMode" style="margin: 8px;">切换编辑/预览模式</el-button>
+                <el-button @click="horizontalFlip" style="margin: 8px;">水平翻转选中节点</el-button>
+                <el-button @click="verticalFlip" style="margin: 8px;">垂直翻转选中节点</el-button>
+            </div>
+            <div style="margin-top: 10px;">
+                <span style="display: block; text-align: center; font-weight: bold;">面板操作按钮</span>
+                <el-button class="btnClass" @click="dcsDataShow">DCS数据</el-button>
+                <el-button class="btnClass" @click="alarmDataShow">设备告警</el-button>
+                <el-button class="btnClass" @click="riskDataShow">风险预警</el-button>
+                <el-button class="btnClass" @click="damageDataShow">损伤分布</el-button>
             </div>
         </div>
     </div>
@@ -1044,28 +1043,23 @@ onMounted(() => {
     background-color: white;
 }
 
-.layout-container {
-    display: flex;
-    width: 100%;
-}
-
 .layout-aside {
-    width: 10%;
+    width: 13%;
     height: 100%;
     border: 1px solid #645d5d;
-    /* 设置1像素宽的灰色实线边框 */
     border-radius: 8px;
-    /* 设置8像素的圆角 */
 }
 
 .layout-main {
-    width: 85%;
+    width: 75%;
     height: 100%;
 }
 
 .layout-right {
-    width: 10%;
+    width: 12%;
     height: 100%;
+    border: 1px solid #645d5d;
+    border-radius: 8px;
 }
 
 .baseBlockClass {
@@ -1092,21 +1086,25 @@ onMounted(() => {
 
 .elementClass {
     display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 水平居中 */
     text-align: center;
     background-color: #f7f4f4;
 }
 
 .btnClass {
-    width: 60%;
+    width: 80%;
     margin: 10px;
 }
 
 .svg_class {
     display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 水平居中 */
     text-align: center;
     background-color: #f7f4f4;
 }
