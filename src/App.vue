@@ -18,11 +18,10 @@ import imageNode from './stageAchievements/imageNode.vue';
 
 <style scoped>
 .container {
-    width: 100vw;
-    height: 100vh;
     background-color: #f1f3f5;
+    width: 100%;       
+    height: 100vh;     
 }
-
 .top {
     height: 5%;
     display: flex;

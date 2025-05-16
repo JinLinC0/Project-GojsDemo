@@ -6,33 +6,33 @@
             <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
                 <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
-                        <img src="/src/assets/base/rectangle.svg" style="width: 75px; height: 75px;" id="rectangle" />
+                        <img src="/src/assets/base/rectangle.svg" style="width: 80%; height: 80%;" id="rectangle" />
                     </el-tooltip>
                 </div>
                 <div id="RoundedRectangle" class="elementClass" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="圆角矩形" placement="top-start">
-                        <img src="/src/assets/base/RoundedRectangle.svg" style="width: 75px; height: 75px;"
+                        <img src="/src/assets/base/RoundedRectangle.svg" style="width: 80%; height: 80%;"
                             id="RoundedRectangle" />
                     </el-tooltip>
                 </div>
                 <div id="Square" class="elementClass" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="正方形" placement="top-start">
-                        <img src="/src/assets/base/Square.svg" style="width: 75px; height: 75px;" id="Square" />
+                        <img src="/src/assets/base/Square.svg" style="width: 80%; height: 80%;" id="Square" />
                     </el-tooltip>
                 </div>
                 <div id="rotundity" class="elementClass" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="圆形" placement="top-start">
-                        <img src="/src/assets/base/rotundity.svg" style="width: 75px; height: 75px;" id="rotundity" />
+                        <img src="/src/assets/base/rotundity.svg" style="width: 80%; height: 80%;" id="rotundity" />
                     </el-tooltip>
                 </div>
                 <div id="triangle" class="elementClass" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="三角形" placement="top-start">
-                        <img src="/src/assets/base/triangle.svg" style="width: 75px; height: 75px;" id="triangle" />
+                        <img src="/src/assets/base/triangle.svg" style="width: 80%; height: 80%;" id="triangle" />
                     </el-tooltip>
                 </div>
                 <div id="rhombus" class="elementClass" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
-                        <img src="/src/assets/base/rhombus.svg" style="width: 75px; height: 75px;" id="rhombus" />
+                        <img src="/src/assets/base/rhombus.svg" style="width: 80%; height: 80%;" id="rhombus" />
                     </el-tooltip>
                 </div>
             </div>
@@ -45,27 +45,27 @@
                 </div>
                 <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
                     </el-tooltip>
                 </div>
                 <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
                     </el-tooltip>
                 </div>
                 <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
                     </el-tooltip>
                 </div>
                 <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
                     </el-tooltip>
                 </div>
                 <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
                     <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 75px; height: 75px;" id="pentagon" />
+                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
                     </el-tooltip>
                 </div>
             </div>
@@ -76,14 +76,14 @@
         </div>
         <!--右侧功能按钮区域-->
         <div id="operationDiv" class="layout-right">
-            <div>
+            <div style="text-align: center;">
                 <span style="display: block; text-align: center; font-weight: bold;">元素操作按钮</span>
                 <!-- <el-button @click="exportData" style="margin: 8px;">导出数据</el-button> -->
-                <el-button @click="toggleEditMode" style="margin: 8px;">切换编辑/预览模式</el-button>
-                <el-button @click="horizontalFlip" style="margin: 8px;">水平翻转选中节点</el-button>
-                <el-button @click="verticalFlip" style="margin: 8px;">垂直翻转选中节点</el-button>
+                <el-button @click="toggleEditMode" style="margin: 8px; width: 90%;">切换编辑/预览模式</el-button>
+                <el-button @click="horizontalFlip" style="margin: 8px; width: 90%;">水平翻转选中节点</el-button>
+                <el-button @click="verticalFlip" style="margin: 8px; width: 90%;">垂直翻转选中节点</el-button>
             </div>
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 10px; text-align: center;">
                 <span style="display: block; text-align: center; font-weight: bold;">面板操作按钮</span>
                 <el-button class="btnClass" @click="dcsDataShow">DCS数据</el-button>
                 <el-button class="btnClass" @click="alarmDataShow">设备告警</el-button>
@@ -1095,7 +1095,7 @@ onMounted(() => {
 }
 
 .btnClass {
-    width: 80%;
+    width: 90%;
     margin: 10px;
 }
 
