@@ -2,71 +2,75 @@
     <div class="common-layout">
         <!--左侧元素区域-->
         <div id="PaletteDiv" class="layout-aside">
-            <span style="display: block; text-align: center; font-weight: bold;">基本几何图形</span>
-            <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
-                <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
-                        <img src="/src/assets/base/rectangle.svg" style="width: 80%; height: 80%;" id="rectangle" />
-                    </el-tooltip>
-                </div>
-                <div id="RoundedRectangle" class="elementClass" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="圆角矩形" placement="top-start">
-                        <img src="/src/assets/base/RoundedRectangle.svg" style="width: 80%; height: 80%;"
-                            id="RoundedRectangle" />
-                    </el-tooltip>
-                </div>
-                <div id="Square" class="elementClass" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="正方形" placement="top-start">
-                        <img src="/src/assets/base/Square.svg" style="width: 80%; height: 80%;" id="Square" />
-                    </el-tooltip>
-                </div>
-                <div id="rotundity" class="elementClass" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="圆形" placement="top-start">
-                        <img src="/src/assets/base/rotundity.svg" style="width: 80%; height: 80%;" id="rotundity" />
-                    </el-tooltip>
-                </div>
-                <div id="triangle" class="elementClass" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="三角形" placement="top-start">
-                        <img src="/src/assets/base/triangle.svg" style="width: 80%; height: 80%;" id="triangle" />
-                    </el-tooltip>
-                </div>
-                <div id="rhombus" class="elementClass" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
-                        <img src="/src/assets/base/rhombus.svg" style="width: 80%; height: 80%;" id="rhombus" />
-                    </el-tooltip>
+            <div>
+                <span style="display: block; text-align: center; font-weight: bold; margin-bottom: 2px;">基本几何图形</span>
+                <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
+                    <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
+                            <img src="/src/assets/base/rectangle.svg" style="width: 80%; height: 80%;" id="rectangle" />
+                        </el-tooltip>
+                    </div>
+                    <div id="RoundedRectangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="圆角矩形" placement="top-start">
+                            <img src="/src/assets/base/RoundedRectangle.svg" style="width: 80%; height: 80%;"
+                                id="RoundedRectangle" />
+                        </el-tooltip>
+                    </div>
+                    <div id="Square" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="正方形" placement="top-start">
+                            <img src="/src/assets/base/Square.svg" style="width: 80%; height: 80%;" id="Square" />
+                        </el-tooltip>
+                    </div>
+                    <div id="rotundity" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="圆形" placement="top-start">
+                            <img src="/src/assets/base/rotundity.svg" style="width: 80%; height: 80%;" id="rotundity" />
+                        </el-tooltip>
+                    </div>
+                    <div id="triangle" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="三角形" placement="top-start">
+                            <img src="/src/assets/base/triangle.svg" style="width: 80%; height: 80%;" id="triangle" />
+                        </el-tooltip>
+                    </div>
+                    <div id="rhombus" class="elementClass" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
+                            <img src="/src/assets/base/rhombus.svg" style="width: 80%; height: 80%;" id="rhombus" />
+                        </el-tooltip>
+                    </div>
                 </div>
             </div>
-            <span style="display: block; text-align: center; font-weight: bold;">SVG几何图形</span>
-            <div class="svgBlockClass">
-                <div id="svg_zhaChi" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="菱形" placement="top-start">
-                        <img id="svg_zhaChi" src="./pid_node/渣池.svg">
-                    </el-tooltip>
-                </div>
-                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
-                    </el-tooltip>
-                </div>
-                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
-                    </el-tooltip>
-                </div>
-                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
-                    </el-tooltip>
-                </div>
-                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
-                    </el-tooltip>
-                </div>
-                <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                    <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                        <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
-                    </el-tooltip>
+            <div style="margin-top: 15px;">
+                <span style="display: block; text-align: center; font-weight: bold; margin-bottom: 2px;">SVG几何图形</span>
+                <div class="svgBlockClass">
+                    <div id="lockHopperGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="锥体1" placement="top-start">
+                            <img src="/src/assets/svg/lockHopper.svg" style="width: 80%; height: 80%;" id="lockHopperGeometry">
+                        </el-tooltip>
+                    </div>
+                    <div id="troughGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="锥体2" placement="top-start">
+                            <img src="/src/assets/svg/trough.svg" style="width: 80%; height: 70%;" id="troughGeometry" />
+                        </el-tooltip>
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
+                        </el-tooltip>
+                    </div>
+                    <div id="cylinderGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="柱体" placement="top-start">
+                            <img src="/src/assets/svg/cylinder.svg" style="width: 80%; height: 60%;" id="cylinderGeometry" />
+                        </el-tooltip>
+                    </div>
+                    <div id="pipGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="管道" placement="top-start">
+                            <img src="/src/assets/svg/pip.svg" style="width: 80%; height: 80%;" id="pipGeometry" />
+                        </el-tooltip>
+                    </div>
+                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
+                        </el-tooltip>
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,8 +208,12 @@ const portPanel = $(go.Panel,
     )
 )
 
-var zhaChiGeometry = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
-var pentagon = go.Geometry.parse("100,20 170,70 150,150 50,150 30,70");
+var lockHopperGeometry = go.Geometry.parse("XFM 0 95.11 L 0 25.37 C 28.47 0 71.53 0 100 25.37 L 100 95.11 L 50 125 Z M 0 25.37 M 0 95.11");
+var troughGeometry = go.Geometry.parse("XFM 0 0 L 90 0 L 90 73.33 L 45 110 L 0 73.33 Z");
+var pentagonGeometry = go.Geometry.parse("M 50 0 L 100 50 L 80 100 L 20 100 L 0 50 Z")
+var cylinderGeometry = go.Geometry.parse("XFM 0 15 C 0 6.72 15.67 0 35 0 C 54.33 0 70 6.72 70 15 L 70 95 C 70 103.28 54.33 110 35 110 C 15.67 110 0 103.28 0 95 Z");
+var pipGeometry = go.Geometry.parse("XFM 5.25 30 L 78.05 30 C 83.85 30 88.55 23.28 88.55 15 C 88.55 6.72 83.85 0 78.05 0 L 5.25 0 C -0.55 0 -5.25 6.72 -5.25 15 C -5.25 23.28 -0.55 30 5.25 30 Z M 5.25 0 M 78.05 0");
+
 
 // 切换添加端口/标定点的形式
 function toggleDivs(value: boolean) {
@@ -308,7 +316,7 @@ function initDiagram() {
         ),
 
         // SVG图片节点模板
-        myDiagram.nodeTemplateMap.add('zhaChi',
+        myDiagram.nodeTemplateMap.add('svgNode',
             $(go.Node, "Spot",
                 {
                     resizable: true,
@@ -328,12 +336,6 @@ function initDiagram() {
                                 strokeWidth: 2.0
                             },
                             new go.Binding('geometry', 'geometry').makeTwoWay(),
-                            new go.Binding('geometry', 'geometry').makeTwoWay(),
-                            // new go.Binding('geometry', '', (data)=>{
-                            //     let geometry = new go.Geometry.parse()
-                            //     geometry.scale(data)
-                            //     return geometry
-                            // })
                         ),
                         $(go.TextBlock,
                             {
@@ -743,10 +745,16 @@ function dragstart(event: any) {
     }
 
     // 设置拖动数据  SVG图形
-    if (target.id === "svg_zhaChi") {
-        event.dataTransfer.setData("node-type", "zhaChi");
+    if (target.id === "lockHopperGeometry") {
+        event.dataTransfer.setData("node-type", "lockHopperGeometry");
+    } else if (target.id === "troughGeometry") {
+        event.dataTransfer.setData("node-type", "troughGeometry");
     } else if (target.id === "pentagon") {
         event.dataTransfer.setData("node-type", "pentagon");
+    } else if (target.id === "cylinderGeometry") {
+        event.dataTransfer.setData("node-type", "cylinderGeometry");
+    } else if (target.id === "pipGeometry") {
+        event.dataTransfer.setData("node-type", "pipGeometry");
     }
 }
 
@@ -812,13 +820,61 @@ function drop(event: any) {
         category = "请输入内容";
         figure = 'Diamond';
     }
-    if (nodeType === "zhaChi") {
-        category = "zhaChi";
-        key = "渣池";
+    // SVG图形
+    if (nodeType === "lockHopperGeometry") {
+        const newData = {
+            key: "请输入内容",
+            size: '100 135',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: lockHopperGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
+    }
+    if (nodeType === "troughGeometry") {
+        const newData = {
+            key: "请输入内容",
+            size: '100 135',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: troughGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
     }
     if (nodeType === "pentagon") {
-        category = "pentagon";
-        key = "请输入内容";
+        const newData = {
+            key: "请输入内容",
+            size: '100 100',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: pentagonGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
+    }
+    if (nodeType === "cylinderGeometry") {
+        const newData = {
+            key: "请输入内容",
+            size: '80 130',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: cylinderGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
+    }
+    if (nodeType === "pipGeometry") {
+        const newData = {
+            key: "请输入内容",
+            size: '200 100',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: pipGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
     }
     const newData = {
         key: key,
@@ -827,7 +883,6 @@ function drop(event: any) {
         figure: figure,
         loc: new go.Point(point.x, point.y),
         portArray: [],
-        markArray: [],
         category: category
     };
     myDiagram.model.addNodeData(newData);
