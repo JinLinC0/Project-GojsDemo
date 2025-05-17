@@ -51,11 +51,6 @@
                             <img src="/src/assets/svg/trough.svg" style="width: 80%; height: 70%;" id="troughGeometry" />
                         </el-tooltip>
                     </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
-                        <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
-                        </el-tooltip>
-                    </div>
                     <div id="cylinderGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="柱体" placement="top-start">
                             <img src="/src/assets/svg/cylinder.svg" style="width: 80%; height: 60%;" id="cylinderGeometry" />
@@ -69,6 +64,11 @@
                     <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
                             <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
+                        </el-tooltip>
+                    </div>
+                    <div id="sixLineGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
+                        <el-tooltip class="box-item" effect="dark" content="六边形" placement="top-start">
+                            <img src="/src/assets/svg/sixLine.svg" style="width: 80%; height: 80%;" id="sixLineGeometry" />
                         </el-tooltip>
                     </div>
                 </div>
@@ -210,10 +210,10 @@ const portPanel = $(go.Panel,
 
 var lockHopperGeometry = go.Geometry.parse("XFM 0 95.11 L 0 25.37 C 28.47 0 71.53 0 100 25.37 L 100 95.11 L 50 125 Z M 0 25.37 M 0 95.11");
 var troughGeometry = go.Geometry.parse("XFM 0 0 L 90 0 L 90 73.33 L 45 110 L 0 73.33 Z");
-var pentagonGeometry = go.Geometry.parse("M 50 0 L 100 50 L 80 100 L 20 100 L 0 50 Z")
 var cylinderGeometry = go.Geometry.parse("XFM 0 15 C 0 6.72 15.67 0 35 0 C 54.33 0 70 6.72 70 15 L 70 95 C 70 103.28 54.33 110 35 110 C 15.67 110 0 103.28 0 95 Z");
 var pipGeometry = go.Geometry.parse("XFM 5.25 30 L 78.05 30 C 83.85 30 88.55 23.28 88.55 15 C 88.55 6.72 83.85 0 78.05 0 L 5.25 0 C -0.55 0 -5.25 6.72 -5.25 15 C -5.25 23.28 -0.55 30 5.25 30 Z M 5.25 0 M 78.05 0");
-
+var pentagonGeometry = go.Geometry.parse("M 50 0 L 100 50 L 80 100 L 20 100 L 0 50 Z");
+var sixLineGeometry = go.Geometry.parse("M 0 50 L 43.3 0 L 86.6 50 L 86.6 150 L 43.3 200 L 0 150 Z");
 
 // 切换添加端口/标定点的形式
 function toggleDivs(value: boolean) {
@@ -749,12 +749,14 @@ function dragstart(event: any) {
         event.dataTransfer.setData("node-type", "lockHopperGeometry");
     } else if (target.id === "troughGeometry") {
         event.dataTransfer.setData("node-type", "troughGeometry");
-    } else if (target.id === "pentagon") {
-        event.dataTransfer.setData("node-type", "pentagon");
     } else if (target.id === "cylinderGeometry") {
         event.dataTransfer.setData("node-type", "cylinderGeometry");
     } else if (target.id === "pipGeometry") {
         event.dataTransfer.setData("node-type", "pipGeometry");
+    } else if (target.id === "pentagon") {
+        event.dataTransfer.setData("node-type", "pentagon");
+    } else if (target.id === "sixLineGeometry") {
+        event.dataTransfer.setData("node-type", "sixLineGeometry");
     }
 }
 
@@ -843,17 +845,6 @@ function drop(event: any) {
         };
         myDiagram.model.addNodeData(newData);
     }
-    if (nodeType === "pentagon") {
-        const newData = {
-            key: "请输入内容",
-            size: '100 100',
-            loc: new go.Point(point.x, point.y),
-            portArray: [],
-            category: "svgNode",  // 关键：确保category正确
-            geometry: pentagonGeometry  // 提供几何图形数据
-        };
-        myDiagram.model.addNodeData(newData);
-    }
     if (nodeType === "cylinderGeometry") {
         const newData = {
             key: "请输入内容",
@@ -873,6 +864,28 @@ function drop(event: any) {
             portArray: [],
             category: "svgNode",  // 关键：确保category正确
             geometry: pipGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
+    }
+    if (nodeType === "pentagon") {
+        const newData = {
+            key: "请输入内容",
+            size: '100 100',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: pentagonGeometry  // 提供几何图形数据
+        };
+        myDiagram.model.addNodeData(newData);
+    }
+    if (nodeType === "sixLineGeometry") {
+        const newData = {
+            key: "请输入内容",
+            size: '100 100',
+            loc: new go.Point(point.x, point.y),
+            portArray: [],
+            category: "svgNode",  // 关键：确保category正确
+            geometry: sixLineGeometry  // 提供几何图形数据
         };
         myDiagram.model.addNodeData(newData);
     }
@@ -1039,9 +1052,9 @@ function horizontalFlip() {
         var isHorizontalFlipped = node.data.isHorizontalFlipped || false;
         var isVerticalFlipped = node.data.isVerticalFlipped || false;
 
-        var zhaChiGeometrySample = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
+        var lockHopperGeometry = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
         // 根据翻转标志计算当前翻转状态
-        var currentGeometry = zhaChiGeometrySample;
+        var currentGeometry = lockHopperGeometry;
         if (isHorizontalFlipped) {
             currentGeometry = currentGeometry.scale(-1, 1);
         }
