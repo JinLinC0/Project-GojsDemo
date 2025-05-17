@@ -2,9 +2,9 @@
     <div class="common-layout">
         <!--左侧元素区域-->
         <div id="PaletteDiv" class="layout-aside">
-            <div>
-                <span style="display: block; text-align: center; font-weight: bold; margin-bottom: 2px;">基本几何图形</span>
-                <div class="baseBlockClass" style="margin-top: 3px; margin-bottom: 5px;">
+            <div class="panel-section" style="height: 40%; overflow: auto">
+                <span class="section-title">基本几何图形</span>
+                <div class="baseBlockClass">
                     <div id="rectangle" class="elementClass" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="矩形" placement="top-start">
                             <img src="/src/assets/base/rectangle.svg" style="width: 80%; height: 80%;" id="rectangle" />
@@ -38,22 +38,25 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-top: 15px;">
-                <span style="display: block; text-align: center; font-weight: bold; margin-bottom: 2px;">SVG几何图形</span>
+            <div class="panel-section" style="height: 40%; overflow: auto;">
+                <span class="section-title">SVG几何图形</span>
                 <div class="svgBlockClass">
                     <div id="lockHopperGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="锥体1" placement="top-start">
-                            <img src="/src/assets/svg/lockHopper.svg" style="width: 80%; height: 80%;" id="lockHopperGeometry">
+                            <img src="/src/assets/svg/lockHopper.svg" style="width: 80%; height: 80%;"
+                                id="lockHopperGeometry">
                         </el-tooltip>
                     </div>
                     <div id="troughGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="锥体2" placement="top-start">
-                            <img src="/src/assets/svg/trough.svg" style="width: 80%; height: 70%;" id="troughGeometry" />
+                            <img src="/src/assets/svg/trough.svg" style="width: 80%; height: 70%;"
+                                id="troughGeometry" />
                         </el-tooltip>
                     </div>
                     <div id="cylinderGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="柱体" placement="top-start">
-                            <img src="/src/assets/svg/cylinder.svg" style="width: 80%; height: 60%;" id="cylinderGeometry" />
+                            <img src="/src/assets/svg/cylinder.svg" style="width: 80%; height: 60%;"
+                                id="cylinderGeometry" />
                         </el-tooltip>
                     </div>
                     <div id="pipGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
@@ -68,32 +71,23 @@
                     </div>
                     <div id="sixLineGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="六边形" placement="top-start">
-                            <img src="/src/assets/svg/sixLine.svg" style="width: 80%; height: 80%;" id="sixLineGeometry" />
+                            <img src="/src/assets/svg/sixLine.svg" style="width: 80%; height: 80%;"
+                                id="sixLineGeometry" />
                         </el-tooltip>
                     </div>
+                </div>
+            </div>
+            <div class="panel-section" style="height: 20%; display: flex; flex-direction: column; justify-content: center;">
+                <span class="section-title">元素操作按钮</span>
+                <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;">
+                    <el-button @click="toggleEditMode">切换编辑/预览模式</el-button>
+                    <el-button @click="exportData">导出数据</el-button>
                 </div>
             </div>
         </div>
         <!--画布区域-->
         <div id="diagramDiv" class="layout-main" @dragover="event => event.preventDefault()"
             @dragenter="event => event.preventDefault()" @drop="drop">
-        </div>
-        <!--右侧功能按钮区域-->
-        <div id="operationDiv" class="layout-right">
-            <div style="text-align: center;">
-                <span style="display: block; text-align: center; font-weight: bold;">元素操作按钮</span>
-                <!-- <el-button @click="exportData" style="margin: 8px;">导出数据</el-button> -->
-                <el-button @click="toggleEditMode" style="margin: 8px; width: 90%;">切换编辑/预览模式</el-button>
-                <el-button @click="horizontalFlip" style="margin: 8px; width: 90%;">水平翻转选中节点</el-button>
-                <el-button @click="verticalFlip" style="margin: 8px; width: 90%;">垂直翻转选中节点</el-button>
-            </div>
-            <div style="margin-top: 10px; text-align: center;">
-                <span style="display: block; text-align: center; font-weight: bold;">面板操作按钮</span>
-                <el-button class="btnClass" @click="dcsDataShow">DCS数据</el-button>
-                <el-button class="btnClass" @click="alarmDataShow">设备告警</el-button>
-                <el-button class="btnClass" @click="riskDataShow">风险预警</el-button>
-                <el-button class="btnClass" @click="damageDataShow">损伤分布</el-button>
-            </div>
         </div>
     </div>
 
@@ -110,27 +104,22 @@
                 </div>
             </div>
             <span style="font-size: smaller; color: gray;">Tips：创建完端口后，可以通过Shift+鼠标左键，来移动端口的位置</span>
-            <div style="margin-top: 30px; display: flex; justify-items: center; align-items: center;">
-                <span>节点数据面板的创建：</span>
-                <el-button style="margin-left: 24px" @click="addDataPanel">创建数据面板</el-button>
-            </div>
-            <el-button style="right: 10px; position: absolute; right: 30px;"
+            <el-button style="right: 10px; position: absolute; right: 30px; bottom: 20px;"
                 @click="dialogVisible = false">关闭</el-button>
         </div>
     </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
 import go from 'gojs';
+import { onMounted, ref } from 'vue';
 import { PortShiftingTool } from './extensions/PortShiftingTool';
 import { ResizeMultipleTool } from './extensions/ResizeMultipleTool';
-// import { LinkLabelDraggingTool } from './extensions/LinkLabelDraggingTools';
-import { NodeLabelDraggingTool } from './extensions/NodeLabelDraggingTool';
-import { GuidedDraggingTool } from './extensions/GuidedDraggingTool';
-import { RotateMultipleTool } from './extensions/RotateMultipleTool';
 import { ElMessage } from 'element-plus';
+import { GuidedDraggingTool } from './extensions/GuidedDraggingTool';
 import { LinkLabelOnPathDraggingTool } from './extensions/LinkLabelOnPathDraggingTool';
+import { NodeLabelDraggingTool } from './extensions/NodeLabelDraggingTool';
+import { RotateMultipleTool } from './extensions/RotateMultipleTool';
 
 const $ = go.GraphObject.make;
 var myDiagram: any;
@@ -141,12 +130,6 @@ const changeModel = ref(true)
 // 计算偏移量变量
 const dragStartOffsetX = ref()
 const dragStartOffsetY = ref()
-
-// 控制展示面板内容展示和隐藏的参数
-const showDcsVisible = ref(true)
-const showAlarmVisible = ref(true)
-const showRiskVisible = ref(true)
-const showDamageVisible = ref(true)
 
 // 端口模板
 const portPanel = $(go.Panel,
@@ -208,17 +191,13 @@ const portPanel = $(go.Panel,
     )
 )
 
+// svg元素Geometry字符串
 var lockHopperGeometry = go.Geometry.parse("XFM 0 95.11 L 0 25.37 C 28.47 0 71.53 0 100 25.37 L 100 95.11 L 50 125 Z M 0 25.37 M 0 95.11");
 var troughGeometry = go.Geometry.parse("XFM 0 0 L 90 0 L 90 73.33 L 45 110 L 0 73.33 Z");
 var cylinderGeometry = go.Geometry.parse("XFM 0 15 C 0 6.72 15.67 0 35 0 C 54.33 0 70 6.72 70 15 L 70 95 C 70 103.28 54.33 110 35 110 C 15.67 110 0 103.28 0 95 Z");
 var pipGeometry = go.Geometry.parse("XFM 5.25 30 L 78.05 30 C 83.85 30 88.55 23.28 88.55 15 C 88.55 6.72 83.85 0 78.05 0 L 5.25 0 C -0.55 0 -5.25 6.72 -5.25 15 C -5.25 23.28 -0.55 30 5.25 30 Z M 5.25 0 M 78.05 0");
 var pentagonGeometry = go.Geometry.parse("M 50 0 L 100 50 L 80 100 L 20 100 L 0 50 Z");
 var sixLineGeometry = go.Geometry.parse("M 0 50 L 43.3 0 L 86.6 50 L 86.6 150 L 43.3 200 L 0 150 Z");
-
-// 切换添加端口/标定点的形式
-function toggleDivs(value: boolean) {
-    changeModel.value = value;
-}
 
 function initDiagram() {
     myDiagram = $(go.Diagram, "diagramDiv", {
@@ -394,172 +373,6 @@ function initDiagram() {
             )
         );
 
-    // 数据展示面板模板
-    myDiagram.nodeTemplateMap.add('infoPanel',
-        $(go.Node, "Spot",
-            {
-                resizable: true,
-                rotatable: true,
-                cursor: 'move',
-                _isLinkLabel: true,
-            },
-            new go.Binding("location", "loc"),
-            new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
-            new go.Binding('itemArray', 'portArray'), {
-            itemTemplate: portPanel,
-        },
-            $(go.Panel, "Spot",
-                $(go.Panel, "Auto",
-                    $(go.Shape, { fill: '#f4f4f4', stroke: 'black', strokeWidth: 1 }),  // 设置最外层边框
-                    $(go.Panel, "Table",
-                        // 设置内部边框
-                        $(go.RowColumnDefinition, { row: 0, separatorStroke: 'black' }),
-                        $(go.RowColumnDefinition, { row: 1, separatorStroke: 'black' }),
-                        $(go.RowColumnDefinition, { row: 2, separatorStroke: 'black' }),
-                        $(go.RowColumnDefinition, { row: 3, separatorStroke: 'black' }),
-                        $(go.Panel, "Table",
-                            $(go.TextBlock,
-                                {
-                                    stroke: 'black',
-                                    margin: 4,
-                                    row: 0,
-                                    column: 0,
-                                },
-                                new go.Binding('text', 'key')
-                            ),
-                            // 报警标志样式模板
-                            $(go.Shape, "Triangle",
-                                {
-                                    desiredSize: new go.Size(20, 20),
-                                    stroke: 'black',
-                                    row: 0,
-                                    column: 1,
-                                    margin: 4
-                                },
-                                {
-                                    toolTip:  // 定义节点工具提示
-                                        $("ToolTip",
-                                            $(go.TextBlock, { margin: 4 },
-                                                new go.Binding("text", "riskData"))  // 绑定设备的风险信息
-                                        )
-                                },
-                                new go.Binding('fill', 'color'),
-                                new go.Binding('visible', '', (obj: any) => {
-                                    const nodeData = obj.part.data;
-                                    return nodeData.riskVisible !== false;
-                                })
-                            )
-                        ),
-                        // DCS面板
-                        $(go.Panel, "Table", { row: 1, column: 0 },
-                            {
-                                defaultColumnSeparatorStroke: 'black',
-                                defaultRowSeparatorStroke: 'black'
-                            },
-                            new go.Binding('itemArray', 'DCSArray'),
-                            {
-                                itemTemplate: $(go.Panel, "TableRow",
-                                    // 参数名模板
-                                    $(go.TextBlock,
-                                        {
-                                            stroke: 'black',
-                                            margin: 4,
-                                            width: 40,
-                                            textAlign: "center"
-                                        },
-                                        new go.Binding('text', 'name')
-                                    ),
-                                    // value模板
-                                    $(go.TextBlock,
-                                        {
-                                            stroke: 'black',
-                                            column: 1,
-                                            margin: 4,
-                                            width: 40,
-                                            textAlign: "center"
-                                        },
-                                        new go.Binding('text', 'value')
-                                    ),
-                                    // 单位模板
-                                    $(go.TextBlock,
-                                        {
-                                            stroke: 'black',
-                                            column: 2,
-                                            margin: 4,
-                                            width: 40,
-                                            textAlign: "center"
-                                        },
-                                        new go.Binding('text', 'unit')
-                                    ),
-                                    new go.Binding('visible', '', (obj: any) => {
-                                        const nodeData = obj.part.data;
-                                        return nodeData.dcsVisible !== false;
-                                    })
-                                )
-                            }
-                        ),
-                        // 告警数据
-                        // $(go.Panel, "Table", { row: 2, column: 0 },
-                        //     {
-                        //         defaultColumnSeparatorStroke: 'black',
-                        //         defaultRowSeparatorStroke: 'black'
-                        //     },
-                        //     new go.Binding('itemArray', 'alarmArray'),
-                        //     {
-                        //         itemTemplate: $(go.Panel, "TableColumn",
-                        //             $(go.TextBlock,
-                        //                 {
-                        //                     stroke: 'black',
-                        //                     margin: 4
-                        //                 },
-                        //                 new go.Binding('text', 'alarmName')
-                        //             ),
-                        //             new go.Binding('visible', '', (data: any, obj: any) => {
-                        //                 const nodeData = obj.part.data;
-                        //                 return nodeData.alarmVisible !== false;
-                        //             })
-                        //         )
-                        //     }
-                        // ),
-                        // 损伤数据
-                        $(go.Panel, "Table", { row: 3, column: 0 },
-                            {
-                                defaultColumnSeparatorStroke: 'black',
-                                defaultRowSeparatorStroke: 'black'
-                            },
-                            new go.Binding('itemArray', 'damageArray'),
-                            {
-                                itemTemplate: $(go.Panel, "TableRow",
-                                    // 损伤名模板
-                                    $(go.TextBlock,
-                                        {
-                                            stroke: 'black',
-                                            margin: 4,
-                                        },
-                                        new go.Binding('text', 'damageName')
-                                    ),
-                                    // value模板
-                                    $(go.TextBlock,
-                                        {
-                                            stroke: 'black',
-                                            column: 1,
-                                            margin: 4,
-                                        },
-                                        new go.Binding('text', 'damageValue')
-                                    ),
-                                    new go.Binding('visible', '', (obj: any) => {
-                                        const nodeData = obj.part.data;
-                                        return nodeData.damageVisible !== false;
-                                    })
-                                )
-                            }
-                        ),
-                    )
-                )
-            )
-        )
-    );
-
     // 节点间的连线模板
     myDiagram.linkTemplate =
         $(go.Link,
@@ -590,23 +403,6 @@ function initDiagram() {
                 }
             },
         );
-
-    // 数据面板的连线模板
-    myDiagram.linkTemplateMap.add('infoPanelLink',
-        $(go.Link,
-            {
-                selectable: true,
-                resegmentable: true,
-                routing: go.Routing.Orthogonal,
-                curve: go.Curve.JumpGap,
-                toShortLength: 2,
-                adjusting: go.LinkAdjusting.End
-            },
-            new go.Binding("points"),
-            $(go.Shape, { isPanelMain: true, strokeWidth: 2, stroke: 'gray' }),
-            $(go.Shape, { isPanelMain: true, strokeWidth: 2, stroke: 'black', name: "FLOW", strokeDashArray: [10, 10] }),
-        )
-    );
 
     // 画布提示工具函数
     function diagramInfo(model: any) {
@@ -717,9 +513,30 @@ function initDiagram() {
 }
 
 // 导出画布中的节点和连线数据
+// 导出画布中的节点和连线数据为JSON文件
 function exportData() {
-    if (myDiagram) {
-        console.log(myDiagram.model.toJson());
+    // 获取图表数据
+    const diagramData = myDiagram.model.toJson();
+    try {
+        // 创建JSON字符串
+        const dataStr = JSON.stringify(JSON.parse(diagramData), null, 2); // 使用2个空格缩进美化输出
+        // 创建Blob对象
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        // 创建下载链接
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'diagram-data.json'; // 设置下载文件名
+        // 触发点击事件下载文件
+        document.body.appendChild(a);
+        a.click();
+        // 清理
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 0);
+    } catch (error) {
+        console.error("Error exporting data:", error);
     }
 }
 
@@ -973,130 +790,6 @@ function toggleEditMode() {
     myDiagram.commitTransaction("changeModel");
 }
 
-// DCS数据在展示面板中的显示/隐藏
-function dcsDataShow() {
-    myDiagram.startTransaction("changeDcsShowModel");
-    showDcsVisible.value = !showDcsVisible.value;
-    if (myDiagram) {
-        myDiagram.nodes.each((node: go.Node) => {
-            myDiagram.model.setDataProperty(node.data, 'dcsVisible', showDcsVisible.value)
-        })
-    }
-    myDiagram.commitTransaction("changeDcsShowModel");
-}
-
-// 告警数据在展示面板中的显示/隐藏
-function alarmDataShow() {
-    myDiagram.startTransaction("changeAlarmShowModel");
-    showAlarmVisible.value = !showAlarmVisible.value;
-    if (myDiagram) {
-        myDiagram.nodes.each((node: go.Node) => {
-            myDiagram.model.setDataProperty(node.data, 'alarmVisible', showAlarmVisible.value)
-        })
-    }
-    myDiagram.commitTransaction("changeAlarmShowModel");
-}
-
-// 风险数据在展示面板中的显示/隐藏
-function riskDataShow() {
-    myDiagram.startTransaction("changeRiskShowModel");
-    showRiskVisible.value = !showRiskVisible.value;
-    if (myDiagram) {
-        myDiagram.nodes.each((node: go.Node) => {
-            myDiagram.model.setDataProperty(node.data, 'riskVisible', showRiskVisible.value)
-        })
-    }
-    myDiagram.commitTransaction("changeRiskShowModel");
-}
-
-// 损伤数据在展示面板中的显示/隐藏
-function damageDataShow() {
-    myDiagram.startTransaction("changeDamageShowModel");
-    showDamageVisible.value = !showDamageVisible.value;
-    if (myDiagram) {
-        myDiagram.nodes.each((node: go.Node) => {
-            myDiagram.model.setDataProperty(node.data, 'damageVisible', showDamageVisible.value)
-        })
-    }
-    myDiagram.commitTransaction("changeDamageShowModel");
-}
-
-// 创建设备的数据面板
-function addDataPanel() {
-    myDiagram.startTransaction("addDataPanel");
-    myDiagram.selection.each((node: any) => {
-        if (!(node instanceof go.Node)) return;
-        const newDataPanel =
-        {
-            key: `${node.data.key}信息面板`,
-            color: "red",
-            portArray: [{ portId: "top0", portKey: "top" }, { portId: "left0", portKey: "left" }, { portId: "right0", portKey: "right" }, { portId: "bottom0", portKey: "bottom" }],
-            DCSArray: [{ name: "流速", value: "20", unit: "m/s" }, { name: "温度", value: "30", unit: "℃" }],
-            damageArray: [{ damageName: "盐酸腐蚀", damageValue: "100%" }],
-            alarmArray: [{ alarmName: "警报" }],
-            riskData: "高风险",
-            category: "infoPanel"
-        }
-        myDiagram.model.addNodeData(newDataPanel);
-    });
-    myDiagram.commitTransaction("addDataPanel");
-}
-
-// svg节点进行水平翻转
-function horizontalFlip() {
-    myDiagram.startTransaction('horizontalFlip');
-    myDiagram.selection.each((node: any) => {
-        if (!(node instanceof go.Node)) return;
-
-        // 获取节点翻转标志
-        var isHorizontalFlipped = node.data.isHorizontalFlipped || false;
-        var isVerticalFlipped = node.data.isVerticalFlipped || false;
-
-        var lockHopperGeometry = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
-        // 根据翻转标志计算当前翻转状态
-        var currentGeometry = lockHopperGeometry;
-        if (isHorizontalFlipped) {
-            currentGeometry = currentGeometry.scale(-1, 1);
-        }
-        if (isVerticalFlipped) {
-            currentGeometry = currentGeometry.scale(1, -1);
-        }
-        // 翻转几何图形
-        var flippedGeometry = currentGeometry.scale(-1, 1);
-        myDiagram.model.setDataProperty(node.data, "geometry", flippedGeometry);
-        myDiagram.model.setDataProperty(node.data, "isHorizontalFlipped", !isHorizontalFlipped);
-    });
-    myDiagram.commitTransaction('horizontalFlip');
-}
-
-// svg节点进行垂直翻转
-function verticalFlip() {
-    myDiagram.startTransaction('verticalFlip');
-    myDiagram.selection.each((node: any) => {
-        if (!(node instanceof go.Node)) return;
-
-        // 获取节点翻转标志
-        var isHorizontalFlipped = node.data.isHorizontalFlipped || false;  // 如果属性不存在则默认为false
-        var isVerticalFlipped = node.data.isVerticalFlipped || false;
-
-        var zhaChiGeometrySample = go.Geometry.parse("XFM88 77.8 0 77.8 0 53.8 88 53.8 136.6 0 181.4 0 181.4 35.3 157.5 35.3 157.5 24.5 136.6 24.5z XM 86.8 70.1 L 141.7 10.2 XM 82.8 66.1 L 137.1 6.4 XM142 8.8B 0 360 139 8.8 3 3 XM87 68.8B 0 360 84 68.8 3 3");
-        // 根据翻转标志计算当前翻转状态
-        var currentGeometry = zhaChiGeometrySample;
-        if (isHorizontalFlipped) {
-            currentGeometry = currentGeometry.scale(-1, 1);
-        }
-        if (isVerticalFlipped) {
-            currentGeometry = currentGeometry.scale(1, -1);
-        }
-
-        // 翻转几何图形
-        var flippedGeometry = currentGeometry.scale(1, -1);
-        myDiagram.model.setDataProperty(node.data, "geometry", flippedGeometry);
-        myDiagram.model.setDataProperty(node.data, "isVerticalFlipped", !isVerticalFlipped);
-    });
-    myDiagram.commitTransaction('verticalFlip');
-}
-
 onMounted(() => {
     initDiagram()
 });
@@ -1104,52 +797,73 @@ onMounted(() => {
 
 <style>
 .common-layout {
-    width: 100%;
-    height: 100%;
     display: flex;
-    justify-content: space-between;
-    background-color: white;
+    height: 100%;
 }
 
 .layout-aside {
-    width: 13%;
+    display: flex;
+    flex-direction: column;
+    width: 15%; /* 或其他您希望的宽度 */
     height: 100%;
-    border: 1px solid #645d5d;
-    border-radius: 8px;
+    border-right: 1px solid #eee;
+    background: #f5f5f5;
+}
+
+.panel-section {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.section-title {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.baseBlockClass, .svgBlockClass {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.elementClass, .svg_class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: move;
+    aspect-ratio: 1/1;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #ddd;
 }
 
 .layout-main {
-    width: 75%;
+    flex-grow: 1;
     height: 100%;
+    background: white;
 }
 
-.layout-right {
-    width: 12%;
+.layout-main {
+    width: 85%;
     height: 100%;
-    border: 1px solid #645d5d;
-    border-radius: 8px;
 }
 
 .baseBlockClass {
     width: 100%;
     height: 30%;
     display: grid;
-    /* 启用 Grid 布局 */
-    grid-template-columns: repeat(2, 1fr);
-    /* 创建 3 列，每列宽度相等 */
-    gap: 10px;
-    /* 可选：设置子元素之间的间距 */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
 .svgBlockClass {
     width: 100%;
     height: 30%;
     display: grid;
-    /* 启用 Grid 布局 */
-    grid-template-columns: repeat(2, 1fr);
-    /* 创建 3 列，每列宽度相等 */
-    gap: 10px;
-    /* 可选：设置子元素之间的间距 */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
 .elementClass {
@@ -1162,17 +876,10 @@ onMounted(() => {
     background-color: #f7f4f4;
 }
 
-.btnClass {
-    width: 90%;
-    margin: 10px;
-}
-
 .svg_class {
     display: flex;
     align-items: center;
-    /* 垂直居中 */
     justify-content: center;
-    /* 水平居中 */
     text-align: center;
     background-color: #f7f4f4;
 }

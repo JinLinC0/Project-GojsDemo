@@ -7,7 +7,7 @@
             <imageNode></imageNode>
         </div>
         <div class="bottom">
-            <span style="color: #868e96; font-size: 15px;">该项目只是一个简单的Gojs小Demo，及支持简单的思维导图的绘制，同时支持数据的导入和导出</span>
+            <span style="color: #868e96; font-size: 15px;">该项目只是一个简单的Gojs小Demo，及支持简单的思维导图的绘制，同时支持GoJs数据的导出</span>
         </div>
     </div>
 </template>
@@ -20,10 +20,11 @@ import imageNode from './stageAchievements/imageNode.vue';
 .container {
     background-color: #f1f3f5;
     width: 100%;       
-    height: 100vh;     
+    height: 100vh;
+    overflow: hidden;
 }
 .top {
-    height: 5%;
+    height: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +43,9 @@ import imageNode from './stageAchievements/imageNode.vue';
 
 .bottom {
     width: 100%;
-    height: 5%;
-    text-align: center;
+    height: 3%;
+    display: flex;
+    align-items: center;      /* 垂直居中 */
+    justify-content: center;  /* 水平居中 */
 }
 </style>
