@@ -77,7 +77,8 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-section" style="height: 20%; display: flex; flex-direction: column; justify-content: center;">
+            <div class="panel-section"
+                style="height: 20%; display: flex; flex-direction: column; justify-content: center;">
                 <span class="section-title">元素操作按钮</span>
                 <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;">
                     <el-button @click="toggleEditMode">切换编辑/预览模式</el-button>
@@ -205,7 +206,7 @@ function initDiagram() {
         'grid.visible': false,  // 画布上面是否出现网格
         "grid.gridCellSize": new go.Size(5, 5),  // 设置背景网格的大小
         "toolManager.mouseWheelBehavior": go.WheelMode.Zoom,
-        // contentAlignment: go.Spot.Center, // 元素位置移动后始终处于在画布正中间
+        contentAlignment: go.Spot.Center, // 元素位置移动后始终处于在画布正中间
         resizingTool: new ResizeMultipleTool(),  // 自定义ResizeMultipleTool()方法来设置元素大小的缩放
         draggingTool: new GuidedDraggingTool(),  // 使用节点对齐辅助
         // 设置辅助对齐的线条的样式
@@ -218,7 +219,6 @@ function initDiagram() {
     });
 
     myDiagram.toolManager.mouseMoveTools.insertAt(0, new PortShiftingTool());  // 设置端口移动
-    //myDiagram.toolManager.mouseMoveTools.insertAt(0, new LinkLabelDraggingTool());  // 设置链接上的文本可以移动
     myDiagram.toolManager.mouseMoveTools.insertAt(0, new LinkLabelOnPathDraggingTool());  // 设置连接上的文本只能沿着连接移动
     myDiagram.toolManager.mouseMoveTools.insertAt(0, new NodeLabelDraggingTool());  // 设置节点上的文本可以移动
 
@@ -283,6 +283,54 @@ function initDiagram() {
                                         "_buttonFillOver": "skyblue",
                                     }
                                 ),
+                                $("ContextMenuButton",
+                                    $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                    {
+                                        click: () => changeColor(myDiagram, "#eaffd0"),
+                                        "ButtonBorder.fill": "#eaffd0",
+                                        "_buttonFillOver": "skyblue",
+                                    }
+                                ),
+                                $("ContextMenuButton",
+                                    $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                    {
+                                        click: () => changeColor(myDiagram, "#f38181"),
+                                        "ButtonBorder.fill": "#f38181",
+                                        "_buttonFillOver": "skyblue",
+                                    }
+                                ),
+                                $("ContextMenuButton",
+                                    $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                    {
+                                        click: () => changeColor(myDiagram, "#95e1d3"),
+                                        "ButtonBorder.fill": "#95e1d3",
+                                        "_buttonFillOver": "skyblue",
+                                    }
+                                ),
+                                $("ContextMenuButton",
+                                    $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                    {
+                                        click: () => changeColor(myDiagram, "#fce38a"),
+                                        "ButtonBorder.fill": "#fce38a",
+                                        "_buttonFillOver": "skyblue",
+                                    }
+                                ),
+                                $("ContextMenuButton",
+                                    $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                    {
+                                        click: () => changeColor(myDiagram, "#ba55d4"),
+                                        "ButtonBorder.fill": "#ba55d4",
+                                        "_buttonFillOver": "skyblue",
+                                    }
+                                ),
+                                $("ContextMenuButton",
+                                    $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                    {
+                                        click: () => changeColor(myDiagram, "#d9a521"),
+                                        "ButtonBorder.fill": "#d9a521",
+                                        "_buttonFillOver": "skyblue",
+                                    }
+                                )
                             )
                     },
                     {
@@ -314,6 +362,7 @@ function initDiagram() {
                                 fill: "white",
                                 strokeWidth: 2.0
                             },
+                            new go.Binding("fill", "color"),
                             new go.Binding('geometry', 'geometry').makeTwoWay(),
                         ),
                         $(go.TextBlock,
@@ -355,13 +404,53 @@ function initDiagram() {
                                         }
                                     ),
                                     $("ContextMenuButton",
-                                        $(go.TextBlock, "Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
                                         {
-                                            click: (e: any) => e.diagram.commandHandler.copySelection(),
-                                            "ButtonBorder.fill": "white",
+                                            click: () => changeColor(myDiagram, "#eaffd0"),
+                                            "ButtonBorder.fill": "#eaffd0",
                                             "_buttonFillOver": "skyblue",
                                         }
                                     ),
+                                    $("ContextMenuButton",
+                                        $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        {
+                                            click: () => changeColor(myDiagram, "#f38181"),
+                                            "ButtonBorder.fill": "#f38181",
+                                            "_buttonFillOver": "skyblue",
+                                        }
+                                    ),
+                                    $("ContextMenuButton",
+                                        $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        {
+                                            click: () => changeColor(myDiagram, "#95e1d3"),
+                                            "ButtonBorder.fill": "#95e1d3",
+                                            "_buttonFillOver": "skyblue",
+                                        }
+                                    ),
+                                    $("ContextMenuButton",
+                                        $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        {
+                                            click: () => changeColor(myDiagram, "#fce38a"),
+                                            "ButtonBorder.fill": "#fce38a",
+                                            "_buttonFillOver": "skyblue",
+                                        }
+                                    ),
+                                    $("ContextMenuButton",
+                                        $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        {
+                                            click: () => changeColor(myDiagram, "#ba55d4"),
+                                            "ButtonBorder.fill": "#ba55d4",
+                                            "_buttonFillOver": "skyblue",
+                                        }
+                                    ),
+                                    $("ContextMenuButton",
+                                        $(go.TextBlock, "Set Color", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
+                                        {
+                                            click: () => changeColor(myDiagram, "#d9a521"),
+                                            "ButtonBorder.fill": "#d9a521",
+                                            "_buttonFillOver": "skyblue",
+                                        }
+                                    )
                                 )
                         },
                         {
@@ -369,7 +458,8 @@ function initDiagram() {
                                 dialogVisible.value = true;
                             }
                         }
-                    )),
+                    )
+                ),
             )
         );
 
@@ -790,6 +880,18 @@ function toggleEditMode() {
     myDiagram.commitTransaction("changeModel");
 }
 
+// 设置节点颜色
+function changeColor(diagram: any, color: string) {
+    diagram.startTransaction('change color');
+    diagram.selection.each((node: any) => {
+        if (node instanceof go.Node) {
+            var data = node.data;
+            diagram.model.setDataProperty(data, 'color', color);
+        }
+    });
+    diagram.commitTransaction('change color');
+}
+
 onMounted(() => {
     initDiagram()
 });
@@ -804,7 +906,8 @@ onMounted(() => {
 .layout-aside {
     display: flex;
     flex-direction: column;
-    width: 15%; /* 或其他您希望的宽度 */
+    width: 15%;
+    /* 或其他您希望的宽度 */
     height: 100%;
     border-right: 1px solid #eee;
     background: #f5f5f5;
@@ -822,13 +925,15 @@ onMounted(() => {
     margin-bottom: 8px;
 }
 
-.baseBlockClass, .svgBlockClass {
+.baseBlockClass,
+.svgBlockClass {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
 }
 
-.elementClass, .svg_class {
+.elementClass,
+.svg_class {
     display: flex;
     justify-content: center;
     align-items: center;
