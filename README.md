@@ -1,9 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# README
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+基本使用：
 
-## Recommended Setup
+- 下载需要的包：`npm install`
+- 运行项目：`npm run dev`
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+基于`Vue3`和`GoJs`搭建的一个小`Demo`，可以用于简单的思维导图和流程图绘制，该项目的基本界面如下：
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+![image-20250517144855212](/public/image-20250517144855212.png)
+
+可以将左侧的元素（该`Demo`只是简单提供了一些基本几何图形和`SVG`几何图形）拖入画布中，双击节点元素，会出现添加端口（是连接线的起始端口）的对话框
+
+![image-20250517144953014](/public/image-20250517144953014.png)
+
+对应新添加的端口，可以通过`Shift`+鼠标左键拖动具体的端口位置
+
+同时，我们可以通过鼠标左键右键节点对节点进行相应的设置，如剪切和设置填充颜色等
+
+![image-20250517145259165](/public/image-20250517145259165.png)
+
+绘制好流程图或者思维导图后，我们可以在元素操作按钮栏目中进行设置，可以切换到预览模式（移除了端口信息）和导出在画布中绘制的数据信息
+
+![image-20250517145543208](/public/image-20250517145543208.png)
