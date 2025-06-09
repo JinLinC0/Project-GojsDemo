@@ -64,9 +64,9 @@
                             <img src="/src/assets/svg/pip.svg" style="width: 80%; height: 80%;" id="pipGeometry" />
                         </el-tooltip>
                     </div>
-                    <div id="pentagon" class="svg_class" draggable="true" @dragstart="dragstart">
+                    <div id="pentagonGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
                         <el-tooltip class="box-item" effect="dark" content="五边形" placement="top-start">
-                            <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagon" />
+                            <img src="/src/assets/svg/pentagon.svg" style="width: 80%; height: 80%;" id="pentagonGeometry" />
                         </el-tooltip>
                     </div>
                     <div id="sixLineGeometry" class="svg_class" draggable="true" @dragstart="dragstart">
@@ -148,7 +148,7 @@ const portPanel = $(go.Panel,
                 $("ContextMenuButton",
                     $(go.TextBlock, "Remove Port", { font: "bold 12px sans-serif", width: 100, textAlign: "center" }),
                     {
-                        click: (e: any, obj: any) => removePort(obj.part.adornedObject),
+                        click: (obj: any) => removePort(obj.part.adornedObject),
                         "ButtonBorder.fill": "white",
                         "_buttonFillOver": "skyblue"
                     }
@@ -197,8 +197,8 @@ var lockHopperGeometry = go.Geometry.parse("XFM 0 95.11 L 0 25.37 C 28.47 0 71.5
 var troughGeometry = go.Geometry.parse("XFM 0 0 L 90 0 L 90 73.33 L 45 110 L 0 73.33 Z");
 var cylinderGeometry = go.Geometry.parse("XFM 0 15 C 0 6.72 15.67 0 35 0 C 54.33 0 70 6.72 70 15 L 70 95 C 70 103.28 54.33 110 35 110 C 15.67 110 0 103.28 0 95 Z");
 var pipGeometry = go.Geometry.parse("XFM 5.25 30 L 78.05 30 C 83.85 30 88.55 23.28 88.55 15 C 88.55 6.72 83.85 0 78.05 0 L 5.25 0 C -0.55 0 -5.25 6.72 -5.25 15 C -5.25 23.28 -0.55 30 5.25 30 Z M 5.25 0 M 78.05 0");
-var pentagonGeometry = go.Geometry.parse("M 50 0 L 100 50 L 80 100 L 20 100 L 0 50 Z");
-var sixLineGeometry = go.Geometry.parse("M 0 50 L 43.3 0 L 86.6 50 L 86.6 150 L 43.3 200 L 0 150 Z");
+var pentagonGeometry = go.Geometry.parse("XFM 50 0 L 100 50 L 80 100 L 20 100 L 0 50 Z");
+var sixLineGeometry = go.Geometry.parse("XFM 0 50 L 43.3 0 L 86.6 50 L 86.6 150 L 43.3 200 L 0 150 Z");
 
 function initDiagram() {
     myDiagram = $(go.Diagram, "diagramDiv", {
@@ -660,8 +660,8 @@ function dragstart(event: any) {
         event.dataTransfer.setData("node-type", "cylinderGeometry");
     } else if (target.id === "pipGeometry") {
         event.dataTransfer.setData("node-type", "pipGeometry");
-    } else if (target.id === "pentagon") {
-        event.dataTransfer.setData("node-type", "pentagon");
+    } else if (target.id === "pentagonGeometry") {
+        event.dataTransfer.setData("node-type", "pentagonGeometry");
     } else if (target.id === "sixLineGeometry") {
         event.dataTransfer.setData("node-type", "sixLineGeometry");
     }
@@ -774,7 +774,7 @@ function drop(event: any) {
         };
         myDiagram.model.addNodeData(newData);
     }
-    if (nodeType === "pentagon") {
+    if (nodeType === "pentagonGeometry") {
         const newData = {
             key: "请输入内容",
             size: '100 100',
