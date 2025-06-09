@@ -698,36 +698,42 @@ function drop(event: any) {
         size = '150 75';
         category = "请输入内容";
         figure = 'Rectangle';
+        color = 'white';
     }
     if (nodeType === "RoundedRectangle") {  // 圆角矩形
         key = '请输入内容';
         size = '150 75';
         category = "请输入内容";
         figure = 'RoundedRectangle';
+        color = 'white';
     }
     if (nodeType === "Square") {  // 正方形
         key = '请输入内容';
         size = '75 75';
         category = "请输入内容";
         figure = 'Square';
+        color = 'white';
     }
     if (nodeType === "rotundity") {  // 圆形
         key = '请输入内容';
         size = '75 75';
         category = "请输入内容";
         figure = 'Ellipse';
+        color = 'white';
     }
     if (nodeType === "triangle") {  // 三角形
         key = '请输入内容';
         size = '100 100';
         category = "请输入内容";
         figure = 'Triangle';
+        color = 'white';
     }
     if (nodeType === "rhombus") {  // 菱形
         key = '请输入内容';
         size = '150 75';
         category = "请输入内容";
         figure = 'Diamond';
+        color = 'white';
     }
     // SVG图形
     if (nodeType === "lockHopperGeometry") {
